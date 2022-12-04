@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!-- The Text -->
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -19,31 +20,51 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="188dp"
-        android:width="360dp"
-        android:height="360dp"
-        android:background="@drawable/wheel"
+    <!-- The Wheel -->
+    <ImageView
+        android:id="@+id/wheel"
+        android:layout_width="360dp"
+        android:layout_height="360dp"
+        android:layout_marginStart="181dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="181dp"
+        android:contentDescription="@string/gl_cksrad"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:srcCompat="@drawable/wheel" />
 
+    <!-- That is the Target-->
     <ImageView
         android:id="@+id/ivTarget"
         android:layout_width="54dp"
         android:layout_height="97dp"
         android:layout_marginStart="181dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="181dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@drawable/target" />
+        app:srcCompat="@drawable/target"
+         />
 
+    <!-- The Input Field -->
+    <EditText
+        android:id="@+id/input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/wheel"
+        tools:ignore="LabelFor"
+        tools:layout_editor_absoluteY="527dp" />
+
+    <!-- The Button to spin -->
     <Button
         android:id="@+id/btnSpin"
         android:layout_width="wrap_content"
@@ -55,6 +76,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteY="602dp" />
 

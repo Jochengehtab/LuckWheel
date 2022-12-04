@@ -4,40 +4,65 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.KeyEvent;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+
+import kotlin.jvm.internal.Ref;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btnSpin;
+    private Button button;
     private CountDownTimer timer;
+    private int max, min;
+    private List<String> members = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        min = 10;
+        max = 30;
 
-        //Initializing views
-        btnSpin = findViewById(R.id.btnSpin);
+        button = findViewById(R.id.btnSpin);
 
         Random random = new Random();
 
-        // on click listener for btnSpin
-        btnSpin.setOnClickListener(view -> {
-            // disabling the button so that user
-            // should not click on the button
-            // while the wheel is spinning
-            btnSpin.setEnabled(false);
+        EditText editText = findViewById(R.id.input);
 
-            // reading random value between 10 to 30
-            int spin = random.nextInt(20)+10;
+        editText.setOnKeyListener((v, keyCode, event) -> {
+            if (keyCode == KeyEvent.KEYCODE_ENTER){
+                if (editText.getText().toString().trim().length() == 0){
+                    showDefaultSubtitle("Bitte gib einen Namen ein.");
+                    return false;
+                }
+                members.add(editText.getText().toString());
+                showDefaultSubtitle(editText.getText().toString() + " wurde hinzugefügt.");
+            }
+            return false;
+        });
+        button.setOnClickListener(view -> {
 
-            // since the wheel has 10 divisions, the
-            // rotation should be a multiple of
-            // 360/10 = 36 degrees
+            button.setEnabled(false);
+
+            int spin = random.nextInt(max) + min;
+
+            //Show Subtitle
+            showDefaultSubtitle("Ausloshung...");
+
+            //Since the wheel has 10 divisions, the
+            //Rotation should be a multiple of
+            //360/10 = 36 degrees
             spin = spin * 36;
-            // timer for each degree movement
+
+            //Timer for each degree movement
             int finalSpin = spin;
             timer = new CountDownTimer(finalSpin,1) {
 
@@ -48,12 +73,16 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onFinish() {
-                    // enabling the button again
-                    btnSpin.setEnabled(true);
+                    //Enabling the Button when it finished
+                    button.setEnabled(true);
                 }
             }.start();
 
         });
 
+    }
+
+    private void showDefaultSubtitle(String msg){
+        Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_SHORT).show();
     }
 }
