@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:LuckyWheel="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity">
 
     <!-- The Text -->
@@ -12,6 +12,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
         android:text="@string/gl_cksrad"
         android:textColor="@android:color/primary_text_light"
         android:textSize="45sp"
@@ -20,48 +21,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- The Wheel -->
-    <ImageView
-        android:id="@+id/wheel"
-        android:layout_width="360dp"
-        android:layout_height="360dp"
-        android:layout_marginStart="181dp"
-        android:layout_marginTop="56dp"
-        android:layout_marginEnd="181dp"
-        android:contentDescription="@string/gl_cksrad"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@drawable/wheel" />
+    <com.bluehomestudio.luckywheel.LuckyWheel
+        android:id="@+id/lwv"
+        android:layout_centerInParent="true"
+        android:paddingBottom="100dp"
+        android:paddingStart="5dp"
+        android:paddingHorizontal="5dp"
+        android:paddingVertical="75dp"
+        android:layout_width="800dp"
+        android:layout_height="800dp"
+        LuckyWheel:background_color="@color/purple_200"
+        tools:ignore="MissingConstraints,RtlSymmetry" />
 
-    <!-- That is the Target-->
-    <ImageView
-        android:id="@+id/ivTarget"
-        android:layout_width="54dp"
-        android:layout_height="97dp"
-        android:layout_marginStart="181dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="181dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@drawable/target"
-         />
 
     <!-- The Input Field -->
     <EditText
         android:id="@+id/input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_marginTop="500dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:importantForAutofill="no"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/wheel"
-        tools:ignore="LabelFor"
+        tools:ignore="LabelFor,MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck"
         tools:layout_editor_absoluteY="527dp" />
 
     <!-- The Button to spin -->
@@ -69,8 +54,8 @@
         android:id="@+id/btnSpin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="161dp"
-        android:layout_marginEnd="161dp"
+        android:layout_marginTop="550dp"
+        android:layout_marginStart="150dp"
         android:text="@string/drehen"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -80,4 +65,4 @@
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteY="602dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
