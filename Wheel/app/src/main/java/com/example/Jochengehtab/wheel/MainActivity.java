@@ -5,11 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 
 import com.bluehomestudio.luckywheel.LuckyWheel;
 import com.bluehomestudio.luckywheel.WheelItem;
@@ -21,34 +21,41 @@ import java.util.Random;
 
 @SuppressWarnings("unused")
 public class MainActivity extends AppCompatActivity {
-    private final String yellow = "#ffff00", blue = "#00008B", red = "#FF0000", green = "#008000";
-    private LuckyWheel lw;
-    List<WheelItem> wheelItems;
-    private Button button;
-    private int max, min;
+
+    private final String blue = "#00008B";
+
+    private LuckyWheel luckyWheel;
+
+    private List<WheelItem> wheelItems;
     private final List<String> members = new ArrayList<>();
+
+    private Button button;
+
+    //randomColorNumber get initialize in getRandomColor()
+    private int max, min, randomColorNumber, winner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         defaultWheel();
-        lw = findViewById(R.id.lwv);
+        luckyWheel = findViewById(R.id.lwv);
 
         min = 0;
 
         button = findViewById(R.id.btnSpin);
         Random random = new Random();
 
-        lw.addWheelItems(wheelItems);
-        lw.setTarget(1);
+        luckyWheel.addWheelItems(wheelItems);
+        luckyWheel.setTarget(1);
 
-        lw.setLuckyWheelReachTheTarget(() -> showDefaultSubtitle("Target Reached"));
+        luckyWheel.setLuckyWheelReachTheTarget(() -> showDefaultSubtitle("The Winner is: " + wheelItems.get(winner).text + "."));
 
         EditText editText = findViewById(R.id.input);
 
         editText.setOnKeyListener((v, keyCode, event) -> {
-            if (keyCode == KeyEvent.KEYCODE_ENTER){
+            if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)){
                 if (editText.getText().toString().trim().length() == 0){
                     showDefaultSubtitle("Bitte gib einen Namen ein.");
                     return false;
@@ -56,26 +63,27 @@ public class MainActivity extends AppCompatActivity {
                 members.add(editText.getText().toString());
                 addAItem(editText.getText().toString());
                 showDefaultSubtitle(editText.getText().toString() + " wurde hinzugefügt.");
+                editText.setText(null);
             }
             return false;
         });
 
 
         button.setOnClickListener(view -> {
-
             if (members.size() == 0){
                 showDefaultSubtitle("Bitte gib ein paar Namen ein!");
                 return;
             }
+
             max = members.size();
 
             button.setEnabled(false);
-            int randomNumber = random.nextInt(max) + min;
+            winner  = random.nextInt(max) + min;
 
             //Show Subtitle
             showDefaultSubtitle("Ausloshung...");
 
-            lw.rotateWheelTo(1);
+            luckyWheel.rotateWheelTo(winner);
             button.setEnabled(true);
         });
 
@@ -87,18 +95,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addAItem(String name){
-        wheelItems.add(new WheelItem(Color.parseColor(getRandomColor()), BitmapFactory.decodeResource(getResources(), R.drawable.yellow), name));
+        if (wheelItems.get(0).text.equalsIgnoreCase("Enter to stat :)")){
+            wheelItems.remove(0);
+        }
+        wheelItems.add(new WheelItem(Color.parseColor(getRandomColor()), BitmapFactory.decodeResource(getResources(), getImageToRandomColor()), name));
     }
 
     private String getRandomColor(){
         Random random = new Random();
-        int minRange = 0, maxRange = 3, randomNumber = random.nextInt( maxRange + 1 - minRange) + minRange;
-        String color = blue;
+        int minRange = 0, maxRange = 3;
+        randomColorNumber = random.nextInt( maxRange + 1 - minRange) + minRange;
 
-        switch (randomNumber){
-            case 0:
-                color = blue;
-                break;
+        String color, yellow = "#ffff00", red = "#FF0000", green = "#008000";
+
+        switch (randomColorNumber){
             case 1:
                 color = yellow;
                 break;
@@ -108,12 +118,39 @@ public class MainActivity extends AppCompatActivity {
             case 3:
                 color = green;
                 break;
+
+            default:
+                color = blue;
+                break;
         }
         return color;
     }
 
-    private void showDefaultSubtitle(String msg){
-        Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_SHORT).show();
+    private int getImageToRandomColor(){
+        int result;
+        switch (randomColorNumber){
+            case 1:
+                result = R.drawable.yellow;
+                break;
+            case 2:
+                result = R.drawable.red;
+                break;
+            case 3:
+                result = R.drawable.green;
+                break;
+
+            default:
+                result = R.drawable.blue;
+                break;
+        }
+        return result;
     }
 
+    private void log(Object msg){
+        Log.println(Log.INFO, "INFO LOG Jochengehtab", String.valueOf(msg));
+    }
+
+    private void showDefaultSubtitle(Object msg){
+        Toast.makeText(getApplicationContext(), String.valueOf(msg), Toast.LENGTH_SHORT).show();
+    }
 }

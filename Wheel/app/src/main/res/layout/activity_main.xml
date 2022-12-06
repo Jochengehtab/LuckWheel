@@ -30,7 +30,7 @@
         android:paddingVertical="75dp"
         android:layout_width="800dp"
         android:layout_height="800dp"
-        LuckyWheel:background_color="@color/purple_200"
+        LuckyWheel:background_color="@color/black"
         tools:ignore="MissingConstraints,RtlSymmetry" />
 
 
