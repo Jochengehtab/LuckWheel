@@ -11,4 +11,5 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="drehen">Drehen</string>
     <string name="gl_cksrad">Glücksrad</string>
+    <string name="neu_klasse">Neu Klasse</string>
 </resources>

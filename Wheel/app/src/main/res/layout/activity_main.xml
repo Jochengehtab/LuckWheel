@@ -21,6 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <com.bluehomestudio.luckywheel.LuckyWheel
         android:id="@+id/lwv"
         android:layout_centerInParent="true"
@@ -32,7 +33,6 @@
         android:layout_height="800dp"
         LuckyWheel:background_color="@color/black"
         tools:ignore="MissingConstraints,RtlSymmetry" />
-
 
     <!-- The Input Field -->
     <EditText
@@ -54,9 +54,24 @@
         android:id="@+id/btnSpin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="550dp"
-        android:layout_marginStart="150dp"
+        android:layout_marginTop="650dp"
+        android:layout_marginStart="225dp"
         android:text="@string/drehen"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="602dp" />
+
+    <Button
+        android:id="@+id/registerClass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="650dp"
+        android:layout_marginStart="85dp"
+        android:text="@string/neu_klasse"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.6"
