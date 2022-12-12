@@ -2,6 +2,7 @@ package com.example.Jochengehtab.wheel;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private List<WheelItem> wheelItems;
     private final List<String> members = new ArrayList<>();
 
-    private Button button;
+    private Button button, registerNewClass;
 
     //randomColorNumber get initialize in getRandomColor()
     private int max, min, randomColorNumber, winner;
@@ -45,9 +46,11 @@ public class MainActivity extends AppCompatActivity {
         defaultWheel();
         luckyWheel = findViewById(R.id.lwv);
 
+
         min = 0;
 
         button = findViewById(R.id.btnSpin);
+        registerNewClass = findViewById(R.id.registerClass);
 
         Random random = new Random();
 
@@ -66,16 +69,14 @@ public class MainActivity extends AppCompatActivity {
                     showDefaultSubtitle("Bitte gib einen Namen ein.");
                     return false;
                 }
-                File.writeInFile();
                 luckyWheel.addWheelItems(wheelItems);
                 members.add(editText.getText().toString());
                 addAItem(editText.getText().toString());
                 showDefaultSubtitle(editText.getText().toString() + " wurde hinzugefügt.");
                 editText.setText(null);
             }
-            return false;
+            return true;
         });
-
 
         button.setOnClickListener(view -> {
             if (members.size() == 0) {
@@ -93,6 +94,11 @@ public class MainActivity extends AppCompatActivity {
 
             luckyWheel.rotateWheelTo(winner);
             button.setEnabled(true);
+        });
+
+        registerNewClass.setOnClickListener(view -> {
+            Intent intent = new Intent(this, RegisterClassActivity.class);
+            startActivity(intent);
         });
     }
 

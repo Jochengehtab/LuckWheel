@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.Jochengehtab.wheel"
-        minSdk 22
+        minSdk 26
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -39,6 +39,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment:2.5.3'
     implementation 'androidx.navigation:navigation-ui:2.5.3'
     implementation 'com.github.mmoamenn:LuckyWheel_Android:0.3.0'
+    implementation 'androidx.wear.tiles:tiles-material:1.1.0-alpha04'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidallprojects x.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'

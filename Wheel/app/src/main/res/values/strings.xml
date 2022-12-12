@@ -12,4 +12,12 @@
     <string name="drehen">Drehen</string>
     <string name="gl_cksrad">Glücksrad</string>
     <string name="neu_klasse">Neu Klasse</string>
+    <string name="zur_ck" />
+    <string name="bitte_gib_hier_die_namen_ein" />
+    <string name="deine_eingebenen_namen" />
+    <string name="title_activity_register_class">RegisterClassActivity</string>
+    <string name="Zurück" />
+    <string name="das_sind_die_eigegebenen_namen">Das sind die eigegebenen Namen:</string>
+    <string name="zr">Zurück</string>
+    <string name="bghene">Bitte gib hier die Namen ein:</string>
 </resources>
