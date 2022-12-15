@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 public class RegisterClassActivity extends AppCompatActivity {
 
-    private int index;
     private SaveManager saveManager;
 
     @Override
@@ -23,21 +22,17 @@ public class RegisterClassActivity extends AppCompatActivity {
         TextView list = findViewById(R.id.output);
         saveManager = new SaveManager(getApplicationContext());
 
-        MainActivity.log(saveManager.get("index"));
-        if (saveManager.get("index") == null){
-            index = Integer.parseInt(saveManager.get("index"));
-        }
-        else{
-            index = 0;
-        }
-
-        if (!(saveManager.get("Classes").equalsIgnoreCase("false"))){
-            MainActivity.log(index);
-            for (int i = 1; index >= i; i++){
+        try {
+            for (int i = 0; i != Integer.parseInt(saveManager.get("index")); i++){
                 list.append("\n - \t" + saveManager.get(String.valueOf(i)));
-                MainActivity.log("Bitte " + saveManager.get(String.valueOf(i)));
+                MainActivity.log("test");
             }
         }
+        catch (NumberFormatException e){
+            MainActivity.log("The File 'Class' is null.");
+            saveManager.set("index", 0);
+        }
+
 
         Button back = findViewById(R.id.back);
         back.setOnClickListener(v -> {
@@ -47,25 +42,19 @@ public class RegisterClassActivity extends AppCompatActivity {
 
         EditText editText = findViewById(R.id.inputadd);
         editText.setOnKeyListener((v, keyCode, event) -> {
+            int count = getIndex();
             if (!(editText.getText().toString().trim().length() == 0)) {
-                saveManager.set(String.valueOf(index), editText.getText().toString());
-                list.append("\n - \t" + saveManager.get(String.valueOf(index)));
+                saveManager.set(String.valueOf(count), editText.getText().toString());
+                list.append("\n - \t" + saveManager.get(String.valueOf(count)));
                 editText.setText(null);
-                index++;
+                count++;
+                saveManager.set("index", count);
             }
             return true;
         });
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        saveManager.set("index", index);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        saveManager.set("index", index);
+    public int getIndex(){
+        return Integer.parseInt(saveManager.get("index"));
     }
 }
