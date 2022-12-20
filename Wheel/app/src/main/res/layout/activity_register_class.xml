@@ -14,16 +14,36 @@
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="600dp" />
+        android:layout_marginVertical="600dp"
+        android:layout_marginStart="70dp"/>
 
-    <TextView
+    <Button
+        android:id="@+id/allClasses"
+        android:text="@string/alle_klassen"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/bghene"
+        android:layout_marginVertical="600dp"
+        android:layout_marginStart="175dp"/>
+
+    <Button
+        android:id="@+id/addClasses"
+        android:text="@string/klasse_hinzuf_gen"
         android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="650dp"
+        android:layout_marginStart="100dp"/>
+
+    <TextView
+        android:id="@+id/top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/bghene"
         android:textSize="29sp"
-        android:layout_margin="20dp"
-        />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/show"
@@ -46,7 +66,6 @@
         android:layout_marginTop="250dp"
         android:layout_marginStart="20dp"
         />
-
 
     <!-- The Input Field -->
     <EditText

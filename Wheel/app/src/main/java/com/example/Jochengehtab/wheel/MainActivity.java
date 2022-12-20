@@ -6,10 +6,10 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -24,9 +24,6 @@ import java.util.Random;
 
 @SuppressWarnings("unused")
 
-/**
- * The class Main activity extends application compat activity
- */
 public class MainActivity extends AppCompatActivity {
 
     private final String blue = "#00008B";
@@ -37,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private List < WheelItem > wheelItems;
     private final List < String > members = new ArrayList < > ();
 
-    private Button button, registerNewClass;
+    private Button button;
 
     //randomColorNumber get initialize in getRandomColor()
     private int max, min, randomColorNumber, winner;
@@ -48,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
         setContentView(R.layout.activity_main);
 
+
         defaultWheel();
         luckyWheel = findViewById(R.id.lwv);
 
@@ -55,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         min = 0;
 
         button = findViewById(R.id.btnSpin);
-        registerNewClass = findViewById(R.id.registerClass);
+        Button registerNewClass = findViewById(R.id.registerClass);
 
         Random random = new Random();
 
@@ -96,15 +94,13 @@ public class MainActivity extends AppCompatActivity {
 
             //Show Subtitle
             showDefaultSubtitle("Ausloshung...");
-
+            MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.openchest);
+            mediaPlayer.start();
             luckyWheel.rotateWheelTo(winner);
             button.setEnabled(true);
         });
 
-        registerNewClass.setOnClickListener(v -> {
-            Intent intent = new Intent(this, RegisterClassActivity.class);
-            startActivity(intent);
-        });
+        registerNewClass.setOnClickListener(v -> startActivity(new Intent(this, RegisterClassActivity.class)));
     }
 
 

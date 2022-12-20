@@ -1,23 +1,22 @@
 <resources>
     <string name="app_name">Wheel</string>
     <string name="action_settings">Settings</string>
+    <string name="previous">Previous</string>
+
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
     <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
     <string name="drehen">Drehen</string>
     <string name="gl_cksrad">Glücksrad</string>
     <string name="neu_klasse">Neu Klasse</string>
-    <string name="zur_ck" />
-    <string name="bitte_gib_hier_die_namen_ein" />
-    <string name="deine_eingebenen_namen" />
     <string name="title_activity_register_class">RegisterClassActivity</string>
-    <string name="Zurück" />
     <string name="das_sind_die_eigegebenen_namen">Das sind die eigegebenen Namen:</string>
     <string name="zr">Zurück</string>
     <string name="bghene">Bitte gib hier die Namen ein:</string>
+    <string name="alle_klassen">Alle Klassen</string>
+    <string name="klasse_hinzuf_gen">Klasse Hinzufügen</string>
+    <string name="shown">Bitte gib hier den Namen der Klasse ein:</string>
 </resources>
