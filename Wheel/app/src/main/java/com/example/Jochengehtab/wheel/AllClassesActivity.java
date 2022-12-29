@@ -6,11 +6,8 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
-
-import java.io.File;
-import java.io.IOException;
 
 public class AllClassesActivity extends AppCompatActivity {
 
@@ -22,17 +19,9 @@ public class AllClassesActivity extends AppCompatActivity {
 
         ListView listView = findViewById(R.id.listView);
 
-        SaveManager saveManager = new SaveManager(getApplicationContext(), "ClassNames1");
-        saveManager.load(getApplicationContext(), "ClassNames1");
+        SaveManager saveManager = new SaveManager(getApplicationContext());
 
-        File file = new File("/data/data/com.example.Jochengehtab.wheel/files", "filename");
-        try {
-            file.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        Object[] objects = saveManager.getAll().values().toArray();
+        Object[] objects = {saveManager.get("ClassNames.txt")};
 
         listView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, objects));
 
@@ -40,7 +29,7 @@ public class AllClassesActivity extends AppCompatActivity {
             MainActivity.log(objects[(int) id]);
         });
 
-        Button back = findViewById(R.id.back);
-        back.setOnClickListener(v -> startActivity(new Intent(this, RegisterClassActivity.class)));
+        ImageButton imageButton = findViewById(R.id.back);
+        imageButton.setOnClickListener(v -> startActivity(new Intent(this, RegisterClassActivity.class)));
     }
 }

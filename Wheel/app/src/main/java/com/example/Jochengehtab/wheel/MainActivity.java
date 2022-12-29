@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 luckyWheel.addWheelItems(wheelItems);
                 members.add(editText.getText().toString());
                 addAItem(editText.getText().toString());
-                showDefaultSubtitle(editText.getText().toString() + " wurde hinzugefÃ¼gt.");
+                showDefaultSubtitle(editText.getText().toString() + " wurde hinzugefügt.");
                 editText.setText(null);
             }
             return true;

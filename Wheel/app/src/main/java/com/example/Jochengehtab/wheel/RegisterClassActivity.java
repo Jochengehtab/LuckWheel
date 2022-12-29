@@ -7,6 +7,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class RegisterClassActivity extends AppCompatActivity {
@@ -24,20 +25,20 @@ public class RegisterClassActivity extends AppCompatActivity {
         top = findViewById(R.id.top),
         show = findViewById(R.id.show);
 
-        saveManager = new SaveManager(getApplicationContext(), "Classes");
+        saveManager = new SaveManager(getApplicationContext());
 
         try {
-            for (int i = 0; i != Integer.parseInt(saveManager.get("index")); i++){
+            for (int i = 0; i != Integer.parseInt(saveManager.get("ClassNames.txt")); i++){
                 list.append("\n - \t" + saveManager.get(String.valueOf(i)));
                 MainActivity.log("test");
             }
         }
         catch (NumberFormatException e){
             MainActivity.log("The File 'Class' is null.");
-            saveManager.set("index", 0);
+            saveManager.set("index.txt", String.valueOf(1));
         }
 
-        Button back = findViewById(R.id.back);
+        ImageButton back = findViewById(R.id.back);
         back.setOnClickListener(v -> startActivity(new Intent(this, MainActivity.class)));
 
 
@@ -57,12 +58,11 @@ public class RegisterClassActivity extends AppCompatActivity {
 
         EditText editText = findViewById(R.id.inputadd);
         editText.setOnKeyListener((v, keyCode, event) -> {
+            MainActivity.log(saveManager.get("index.txt"));
             int count = getIndex();
             if (!(editText.getText().toString().trim().length() == 0)) {
                 if (isRegisteringANewClass){
-                    saveManager.load(getApplicationContext(), editText.getText().toString());
-                    saveManager.load(getApplicationContext(), "ClassNames");
-                    saveManager.set("ClassNames", editText.getText().toString());
+                    saveManager.set("ClassNames.txt", editText.getText().toString() + "\n");
                     top.setText(R.string.bghene);
                     show.setText(R.string.das_sind_die_eigegebenen_namen);
                     isRegisteringANewClass = false;
@@ -72,13 +72,13 @@ public class RegisterClassActivity extends AppCompatActivity {
                 list.append("\n - \t" + saveManager.get(String.valueOf(count)));
                 editText.setText(null);
                 count++;
-                saveManager.set("index", count);
+                saveManager.set("index.txt", String.valueOf(count));
             }
             return true;
         });
     }
 
     public int getIndex(){
-        return Integer.parseInt(saveManager.get("index"));
+        return Integer.parseInt(saveManager.get("index.txt").trim());
     }
 }
